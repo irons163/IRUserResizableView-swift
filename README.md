@@ -5,6 +5,7 @@
 
 - IRUserResizableView-swift is a powerful resizable view for iOS.
 - IRUserResizableView-swift is modeled after the resizable image view from the Pages iOS app. Any UIView can be provided as the content view for the IRUserResizableView-swift. As the view is respositioned and resized, setFrame: will be called on the content view accordingly.
+- Objc version see here:[IRUserResizableView](https://github.com/irons163/IRUserResizableView)
 
 ## Features
 - Resizable.
