@@ -1,10 +1,10 @@
 ![Build Status](https://img.shields.io/badge/build-%20passing%20-brightgreen.svg)
 ![Platform](https://img.shields.io/badge/Platform-%20iOS%20-blue.svg)
 
-# IRUserResizableView 
+# IRUserResizableView-swift 
 
-- IRUserResizableView is a powerful resizable view for iOS.
-- IRUserResizableView is modeled after the resizable image view from the Pages iOS app. Any UIView can be provided as the content view for the IRUserResizableView. As the view is respositioned and resized, setFrame: will be called on the content view accordingly.
+- IRUserResizableView-swift is a powerful resizable view for iOS.
+- IRUserResizableView-swift is modeled after the resizable image view from the Pages iOS app. Any UIView can be provided as the content view for the IRUserResizableView-swift. As the view is respositioned and resized, setFrame: will be called on the content view accordingly.
 
 ## Features
 - Resizable.
@@ -18,53 +18,59 @@
 - You can remove the `demo` and `ScreenShots` folder.
 
 ### Cocoapods
-- Add `pod 'IRUserResizableView'`  in the `Podfile`
-- `pod install`
+- Not support yet.
 
 ## Usage
 
 ### Basic
-``` objective-c
-#import "IRUserResizableView.h"
+``` swift
+import IRUserResizableView_swift
 
 ...
 
-- (void)viewDidLoad {
-CGRect frame = CGRectMake(50, 50, 200, 150);
-IRUserResizableView *userResizableView = [[IRUserResizableView alloc] initWithFrame:frame];
-UIView *contentView = [[UIView alloc] initWithFrame:frame];
-[contentView setBackgroundColor:[UIColor redColor]];
-userResizableView.contentView = contentView;
-[self.view addSubview:userResizableView];
-[contentView release]; 
-[userResizableView release];
+override func viewDidLoad() {
+    super.viewDidLoad()
+
+    let appFrame = UIScreen.main.bounds
+    self.view = UIView.init(frame: appFrame);
+    self.view.backgroundColor = .green;
+
+    // (1) Create a user resizable view with a simple red background content view.
+    let gripFrame = CGRect.init(x: 50, y: 50, width: 200, height: 150)
+    let userResizableView = IRUserResizableView.init(frame: gripFrame)
+    let contentView = UIView.init(frame: gripFrame);
+    contentView.backgroundColor = .red;
+    userResizableView.contentView = contentView;
+    userResizableView.delegate = self;
+    userResizableView.showEditingHandles()
+    self.view.addSubview(userResizableView)
 }
 ```
 
-If you'd like to receive callbacks when the IRUserResizableView receives touchBegan:, touchesEnded: and touchesCancelled: messages, set the delegate on the IRUserResizableView accordingly. 
+If you'd like to receive callbacks when the IRUserResizableView-swift receives touchBegan:, touchesEnded: and touchesCancelled: messages, set the delegate on the IRUserResizableView-swift accordingly. 
 
-``` objective-c
-userResizableView.delegate = self;
+``` swift
+userResizableView.delegate = self
 ```
 
 Then implement the following delegate methods.
 
-``` objective-c
-- (void)userResizableViewDidBeginEditing:(IRUserResizableView *)userResizableView;
-- (void)userResizableViewDidEndEditing:(IRUserResizableView *)userResizableView;
+``` swift
+func userResizableViewDidBeginEditing(userResizableView: IRUserResizableView)
+func userResizableViewDidEndEditing(userResizableView: IRUserResizableView)
 ```
 
-By default, IRUserResizableView will show the editing handles (as seen in the screenshot above) whenever it receives a touch event. The editing handles will remain visible even after the userResizableViewDidEndEditing: message is sent. This is to provide visual feedback to the user that the view is indeed moveable and resizable. If you'd like to dismiss the editing handles, you must explicitly call -hideEditingHandles.
+By default, IRUserResizableView-swift will show the editing handles (as seen in the screenshot above) whenever it receives a touch event. The editing handles will remain visible even after the userResizableViewDidEndEditing: message is sent. This is to provide visual feedback to the user that the view is indeed moveable and resizable. If you'd like to dismiss the editing handles, you must explicitly call -hideEditingHandles.
 
-The IRUserResizableView is customizable using the following properties:
+The IRUserResizableView-swift is customizable using the following properties:
 
-``` objective-c
-@property (nonatomic) CGFloat minWidth;
-@property (nonatomic) CGFloat minHeight;
-@property (nonatomic) BOOL preventsPositionOutsideSuperview;
+``` swift
+var minWidth: CGFloat = 0.0
+var minHeight: CGFloat = 0.0
+var preventsPositionOutsideSuperview: Bool?
 ```
 
-For an example of how to use IRUserResizableView, please see the included example project.
+For an example of how to use IRUserResizableView-swift, please see the included example project.
 
 
 ## Screenshots
